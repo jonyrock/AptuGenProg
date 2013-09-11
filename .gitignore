@@ -1,0 +1,22 @@
+.idea/*
+.idea/
+out/
+src/ru/aptu/xml/ast/
+src/ru/aptu/xml/ASTLexer.java
+src/ru/aptu/xml/ASTParser.java
+src/ru/aptu/xml/ASTTree.java
+
+
+#java specific
+*.class
+
+#netbeans ignore personal stuff 
+nbproject/private/
+
+
+## generic files to ignore
+*~
+*.lock
+*.DS_Store
+*.swp
+*.out
