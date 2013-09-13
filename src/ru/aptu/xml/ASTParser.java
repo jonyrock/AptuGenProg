@@ -7,10 +7,10 @@ import java.util.List;
 import ru.aptu.xml.ASTLexer.ErrorReporter;
 import ru.aptu.xml.ASTLexer.LapgSymbol;
 import ru.aptu.xml.ASTLexer.Lexems;
+import ru.aptu.xml.ast.AstInner;
 import ru.aptu.xml.ast.AstInput;
 import ru.aptu.xml.ast.AstTag;
 import ru.aptu.xml.ast.AstTagText;
-import ru.aptu.xml.ast.IAstInner;
 
 public class ASTParser {
 
@@ -175,18 +175,30 @@ public class ASTParser {
 						null /* input */, tmStack[tmHead].offset, tmStack[tmHead].endoffset);
 				break;
 			case 1:  // inner_list ::= inner_list inner
-				((List<IAstInner>)lapg_gg.value).add(((IAstInner)tmStack[tmHead].value));
+				((List<AstInner>)lapg_gg.value).add(((AstInner)tmStack[tmHead].value));
 				break;
 			case 2:  // inner_list ::= inner
 				lapg_gg.value = new ArrayList();
-				((List<IAstInner>)lapg_gg.value).add(((IAstInner)tmStack[tmHead].value));
+				((List<AstInner>)lapg_gg.value).add(((AstInner)tmStack[tmHead].value));
 				break;
 			case 3:  // tag ::= tagOpen inner_list tagClose
 				lapg_gg.value = new AstTag(
 						((String)tmStack[tmHead - 2].value) /* name */,
-						((List<IAstInner>)tmStack[tmHead - 1].value) /* inner */,
+						((List<AstInner>)tmStack[tmHead - 1].value) /* inner */,
 						((String)tmStack[tmHead].value) /* tagClose */,
 						null /* input */, tmStack[tmHead - 2].offset, tmStack[tmHead].endoffset);
+				break;
+			case 4:  // inner ::= tag
+				lapg_gg.value = new AstInner(
+						((AstTag)tmStack[tmHead].value) /* elem */,
+						null /* elem2 */,
+						null /* input */, tmStack[tmHead].offset, tmStack[tmHead].endoffset);
+				break;
+			case 5:  // inner ::= tagText
+				lapg_gg.value = new AstInner(
+						null /* elem */,
+						((AstTagText)tmStack[tmHead].value) /* elem2 */,
+						null /* input */, tmStack[tmHead].offset, tmStack[tmHead].endoffset);
 				break;
 			case 6:  // tagText ::= innerText
 				lapg_gg.value = new AstTagText(

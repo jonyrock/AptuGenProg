@@ -10,11 +10,11 @@ public abstract class AstVisitor {
 		return true;
 	}
 
-	protected boolean visit(AstTagText n) {
+	protected boolean visit(AstInner n) {
 		return true;
 	}
 
-    protected boolean visit(AstInner n) {
-        return true;
-    }
+	protected boolean visit(AstTagText n) {
+		return true;
+	}
 }

@@ -18,8 +18,8 @@ _skip:       /[\n\t\r ]+/ (space)
 :: parser
 
 input ::= rts=tag;
-tag ::= name=tagOpen inner=inner+ tagClose;
-inner ::= tag | tagText;
+tag ::= name=tagOpen inner=inner+ tagClose ;
+inner ::= elem=tag | elem=tagText;
 tagText ::= text=innerText;
 
 
