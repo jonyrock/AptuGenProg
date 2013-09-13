@@ -1,5 +1,5 @@
 <asdf1>
-    also text
+    also text{}
     <abc>
         text 123
         <abc>text 123</abc>
@@ -8,3 +8,6 @@
     <zxcv2> text text</zxcv2>
     <zxvv> text text</zxvv>
 </asdf1>
+<a>
+    ad;salkd;lsk
+</a>

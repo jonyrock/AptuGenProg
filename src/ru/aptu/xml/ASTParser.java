@@ -185,7 +185,7 @@ public class ASTParser {
 				lapg_gg.value = new AstTag(
 						((String)tmStack[tmHead - 2].value) /* name */,
 						((List<AstInner>)tmStack[tmHead - 1].value) /* inner */,
-						((String)tmStack[tmHead].value) /* tagClose */,
+						((String)tmStack[tmHead].value) /* cname */,
 						null /* input */, tmStack[tmHead - 2].offset, tmStack[tmHead].endoffset);
 				break;
 			case 4:  // inner ::= tag
