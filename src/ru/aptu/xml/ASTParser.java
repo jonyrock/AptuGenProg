@@ -8,7 +8,9 @@ import ru.aptu.xml.ASTLexer.ErrorReporter;
 import ru.aptu.xml.ASTLexer.LapgSymbol;
 import ru.aptu.xml.ASTLexer.Lexems;
 import ru.aptu.xml.ast.AstInput;
-import ru.aptu.xml.ast.AstStmt;
+import ru.aptu.xml.ast.AstTag;
+import ru.aptu.xml.ast.AstTagText;
+import ru.aptu.xml.ast.IAstInner;
 
 public class ASTParser {
 
@@ -26,45 +28,45 @@ public class ASTParser {
 	}
 
 	private static final boolean DEBUG_SYNTAX = false;
-	private static final int[] tmAction = ASTLexer.unpack_int(9,
-		"\ufffd\uffff\ufff7\uffff\uffff\uffff\0\0\uffff\uffff\uffff\uffff\3\0\uffff\uffff" +
-		"\ufffe\uffff");
+	private static final int[] tmAction = ASTLexer.unpack_int(12,
+		"\uffff\uffff\uffff\uffff\0\0\6\0\4\0\2\0\5\0\uffff\uffff\3\0\1\0\uffff\uffff\ufffe" +
+		"\uffff");
 
-	private static final short[] tmLalr = ASTLexer.unpack_short(12,
-		"\0\1\1\1\uffff\ufffe\1\uffff\0\2\uffff\ufffe");
+	private static final short[] lapg_sym_goto = ASTLexer.unpack_short(11,
+		"\0\1\4\5\7\7\10\13\15\17\20");
 
-	private static final short[] lapg_sym_goto = ASTLexer.unpack_short(10,
-		"\0\1\2\3\4\5\5\6\7\10");
+	private static final short[] lapg_sym_from = ASTLexer.unpack_short(16,
+		"\12\0\1\7\7\1\7\0\0\1\7\1\7\1\7\1");
 
-	private static final short[] lapg_sym_from = ASTLexer.unpack_short(8,
-		"\7\1\4\2\5\0\1\0");
+	private static final short[] lapg_sym_to = ASTLexer.unpack_short(16,
+		"\13\1\1\1\10\3\3\12\2\4\4\5\11\6\6\7");
 
-	private static final short[] lapg_sym_to = ASTLexer.unpack_short(8,
-		"\10\2\5\4\6\7\3\1");
+	private static final short[] lapg_rlen = ASTLexer.unpack_short(7,
+		"\1\2\1\3\1\1\1");
 
-	private static final short[] lapg_rlen = ASTLexer.unpack_short(4,
-		"\2\0\1\4");
-
-	private static final short[] lapg_rlex = ASTLexer.unpack_short(4,
-		"\10\10\6\7");
+	private static final short[] lapg_rlex = ASTLexer.unpack_short(7,
+		"\5\11\11\6\7\7\10");
 
 	protected static final String[] lapg_syms = new String[] {
 		"eoi",
-		"identifier",
-		"val",
-		"eq",
-		"semicol",
+		"tagOpen",
+		"tagClose",
+		"innerText",
 		"_skip",
 		"input",
-		"stmt",
-		"stmt_optlist",
+		"tag",
+		"inner",
+		"tagText",
+		"inner_list",
 	};
 
 	public interface Tokens extends Lexems {
 		// non-terminals
-		public static final int input = 6;
-		public static final int stmt = 7;
-		public static final int stmt_optlist = 8;
+		public static final int input = 5;
+		public static final int tag = 6;
+		public static final int inner = 7;
+		public static final int tagText = 8;
+		public static final int inner_list = 9;
 	}
 
 	/**
@@ -74,15 +76,6 @@ public class ASTParser {
 	 * 0..n   Reduce (rule index)
 	 */
 	protected static int tmAction(int state, int symbol) {
-		int p;
-		if (tmAction[state] < -2) {
-			for (p = -tmAction[state] - 3; tmLalr[p] >= 0; p += 2) {
-				if (tmLalr[p] == symbol) {
-					break;
-				}
-			}
-			return tmLalr[p + 1];
-		}
 		return tmAction[state];
 	}
 
@@ -119,7 +112,7 @@ public class ASTParser {
 		tmStack[0].state = 0;
 		tmNext = tmLexer.next();
 
-		while (tmStack[tmHead].state != 8) {
+		while (tmStack[tmHead].state != 11) {
 			int action = tmAction(tmStack[tmHead].state, tmNext.symbol);
 
 			if (action >= 0) {
@@ -133,7 +126,7 @@ public class ASTParser {
 			}
 		}
 
-		if (tmStack[tmHead].state != 8) {
+		if (tmStack[tmHead].state != 11) {
 			reporter.error(tmNext.offset, tmNext.endoffset, tmNext.line,
 						MessageFormat.format("syntax error before line {0}",
 								tmLexer.getTokenLine()));
@@ -176,22 +169,29 @@ public class ASTParser {
 	@SuppressWarnings("unchecked")
 	protected void applyRule(LapgSymbol lapg_gg, int rule, int ruleLength) {
 		switch (rule) {
-			case 0:  // stmt_optlist ::= stmt_optlist stmt
-				((List<AstStmt>)lapg_gg.value).add(((AstStmt)tmStack[tmHead].value));
-				break;
-			case 1:  // stmt_optlist ::=
-				lapg_gg.value = new ArrayList();
-				break;
-			case 2:  // input ::= stmt_optlist
+			case 0:  // input ::= tag
 				lapg_gg.value = new AstInput(
-						((List<AstStmt>)tmStack[tmHead].value) /* s */,
+						((AstTag)tmStack[tmHead].value) /* rts */,
 						null /* input */, tmStack[tmHead].offset, tmStack[tmHead].endoffset);
 				break;
-			case 3:  // stmt ::= identifier eq val semicol
-				lapg_gg.value = new AstStmt(
-						((String)tmStack[tmHead - 3].value) /* identifier */,
-						((Integer)tmStack[tmHead - 1].value) /* val */,
-						null /* input */, tmStack[tmHead - 3].offset, tmStack[tmHead].endoffset);
+			case 1:  // inner_list ::= inner_list inner
+				((List<IAstInner>)lapg_gg.value).add(((IAstInner)tmStack[tmHead].value));
+				break;
+			case 2:  // inner_list ::= inner
+				lapg_gg.value = new ArrayList();
+				((List<IAstInner>)lapg_gg.value).add(((IAstInner)tmStack[tmHead].value));
+				break;
+			case 3:  // tag ::= tagOpen inner_list tagClose
+				lapg_gg.value = new AstTag(
+						((String)tmStack[tmHead - 2].value) /* name */,
+						((List<IAstInner>)tmStack[tmHead - 1].value) /* inner */,
+						((String)tmStack[tmHead].value) /* tagClose */,
+						null /* input */, tmStack[tmHead - 2].offset, tmStack[tmHead].endoffset);
+				break;
+			case 6:  // tagText ::= innerText
+				lapg_gg.value = new AstTagText(
+						((String)tmStack[tmHead].value) /* text */,
+						null /* input */, tmStack[tmHead].offset, tmStack[tmHead].endoffset);
 				break;
 		}
 	}

@@ -9,18 +9,20 @@ endpositions="offset"
 
 :: lexer
 
-identifier(String): /[a-zA-Z_][a-zA-Z_0-9]*/   { $symbol = current(); }
-val(Integer):  /-?[0-9]+/                     { $symbol = Integer.parseInt(current()); }
-eq:             /=/
-semicol:        /;/
-_skip:          /[\n\t\r ]+/ (space)
+tagOpen(String): /<[a-zA-Z_][a-zA-Z_0-9]*>/ { $symbol = current().substring(1, current().length() - 1); }
+tagClose(String): /<\/[a-zA-Z_][a-zA-Z_0-9]*>/ { $symbol = current().substring(2, current().length() - 1); }
+innerText(String): /[a-zA-Z_0-9]+/ { $symbol = current(); }
+_skip:       /[\n\t\r ]+/ (space)
+
 
 :: parser
 
-input ::= s=stmt* ;
-stmt ::= identifier eq val semicol;
+input ::= rts=tag;
+tag ::= name=tagOpen inner=inner+ tagClose;
+inner ::= tag | tagText;
+tagText ::= text=innerText;
 
-%%
+
 
 
 

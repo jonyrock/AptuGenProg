@@ -16,9 +16,9 @@ public class Main {
         int len = r.read(buf, 0, 10000);
 
         ASTTree<AstInput> tree = ASTTree.parse(new ASTTree.TextSource("input.xml", Arrays.copyOf(buf, len), 1));
-
-        for (ASTTree.ASTProblem e:tree.getErrors()){
-            System.out.println(e.getMessage()+" at "+e.getOffset());
+        
+        for (ASTTree.ASTProblem e : tree.getErrors()) {
+            System.out.println(e.getMessage() + " at " + e.getOffset());
         }
 
     }

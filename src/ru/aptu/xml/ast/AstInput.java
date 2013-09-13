@@ -1,29 +1,26 @@
 package ru.aptu.xml.ast;
 
-import java.util.List;
 import ru.aptu.xml.ASTTree.TextSource;
 
 public class AstInput extends AstNode {
 
-	private List<AstStmt> s;
+	private AstTag rts;
 
-	public AstInput(List<AstStmt> s, TextSource input, int start, int end) {
+	public AstInput(AstTag rts, TextSource input, int start, int end) {
 		super(input, start, end);
-		this.s = s;
+		this.rts = rts;
 	}
 
-	public List<AstStmt> getS() {
-		return s;
+	public AstTag getRts() {
+		return rts;
 	}
 	public void accept(AstVisitor v) {
 		if (!v.visit(this)) {
 			return;
 		}
 
-		if (s != null) {
-			for (AstStmt it : s) {
-				it.accept(v);
-			}
+		if (rts != null) {
+			rts.accept(v);
 		}
 	}
 }

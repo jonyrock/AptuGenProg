@@ -18,11 +18,10 @@ public class ASTLexer {
 	public interface Lexems {
 		public static final int Unavailable_ = -1;
 		public static final int eoi = 0;
-		public static final int identifier = 1;
-		public static final int val = 2;
-		public static final int eq = 3;
-		public static final int semicol = 4;
-		public static final int _skip = 5;
+		public static final int tagOpen = 1;
+		public static final int tagClose = 2;
+		public static final int innerText = 3;
+		public static final int _skip = 4;
 	}
 
 	public interface ErrorReporter {
@@ -112,22 +111,23 @@ public class ASTLexer {
 	private static final short tmCharClass[] = {
 		0, 1, 1, 1, 1, 1, 1, 1, 1, 7, 7, 1, 1, 7, 1, 1,
 		1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
-		7, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 2, 1, 1,
-		6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 1, 4, 1, 3, 1, 1,
+		7, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 4,
+		6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 1, 1, 2, 1, 3, 1,
 		1, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5,
 		5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 1, 1, 1, 1, 5,
 		1, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5,
 		5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 1, 1, 1, 1, 1
 	};
 
-	private static final short[] tmRuleSymbol = unpack_short(5,
-		"\1\2\3\4\5");
+	private static final short[] tmRuleSymbol = unpack_short(4,
+		"\1\2\3\4");
 
 	private static final int tmClassesCount = 8;
 
-	private static final short[] tmGoto = unpack_vc_short(56,
-		"\1\ufffe\1\uffff\1\1\1\2\1\3\1\4\1\5\1\6\6\uffff\1\5\1\uffff\10\ufffb\10\ufffa\5" +
-		"\ufffd\2\4\1\ufffd\6\ufffc\1\5\1\ufffc\7\ufff9\1\6");
+	private static final short[] tmGoto = unpack_vc_short(72,
+		"\1\ufffe\1\uffff\1\1\2\uffff\2\2\1\3\4\uffff\1\4\1\5\2\uffff\5\ufffb\2\2\1\ufffb" +
+		"\7\ufffa\1\3\5\uffff\1\6\5\uffff\1\7\1\uffff\2\5\4\uffff\1\10\1\uffff\2\6\1\uffff" +
+		"\10\ufffd\10\ufffc");
 
 	private static short[] unpack_vc_short(int size, String... st) {
 		short[] res = new short[size];
@@ -225,13 +225,16 @@ public class ASTLexer {
 	protected boolean createToken(LapgSymbol lapg_n, int ruleIndex) throws IOException {
 		boolean spaceToken = false;
 		switch (ruleIndex) {
-			case 0: // identifier: /[a-zA-Z_][a-zA-Z_0-9]*/
+			case 0: // tagOpen: /<[a-zA-Z_][a-zA-Z_0-9]*>/
+				 lapg_n.value = current().substring(1, current().length() - 1); 
+				break;
+			case 1: // tagClose: /<\/[a-zA-Z_][a-zA-Z_0-9]*>/
+				 lapg_n.value = current().substring(2, current().length() - 1); 
+				break;
+			case 2: // innerText: /[a-zA-Z_0-9]+/
 				 lapg_n.value = current(); 
 				break;
-			case 1: // val: /\-?[0-9]+/
-				 lapg_n.value = Integer.parseInt(current()); 
-				break;
-			case 4: // _skip: /[\n\t\r ]+/
+			case 3: // _skip: /[\n\t\r ]+/
 				spaceToken = true;
 				break;
 		}

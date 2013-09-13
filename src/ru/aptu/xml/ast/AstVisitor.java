@@ -6,7 +6,15 @@ public abstract class AstVisitor {
 		return true;
 	}
 
-	protected boolean visit(AstStmt n) {
+	protected boolean visit(AstTag n) {
 		return true;
 	}
+
+	protected boolean visit(AstTagText n) {
+		return true;
+	}
+
+    protected boolean visit(AstInner n) {
+        return true;
+    }
 }
