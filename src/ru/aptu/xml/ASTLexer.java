@@ -20,9 +20,8 @@ public class ASTLexer {
 		public static final int eoi = 0;
 		public static final int tagOpen = 1;
 		public static final int tagClose = 2;
-		public static final int tagCloseChar = 3;
-		public static final int innerText = 4;
-		public static final int _skip = 5;
+		public static final int innerText = 3;
+		public static final int _skip = 4;
 	}
 
 	public interface ErrorReporter {
@@ -120,15 +119,15 @@ public class ASTLexer {
 		5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 1, 1, 1, 1, 1
 	};
 
-	private static final short[] tmRuleSymbol = unpack_short(5,
-		"\1\2\3\4\5");
+	private static final short[] tmRuleSymbol = unpack_short(4,
+		"\1\2\3\4");
 
 	private static final int tmClassesCount = 8;
 
 	private static final short[] tmGoto = unpack_vc_short(72,
-		"\1\ufffe\1\uffff\1\1\1\2\1\uffff\2\3\1\4\4\uffff\1\5\1\6\2\uffff\10\ufffb\5\ufffa" +
-		"\2\3\1\ufffa\7\ufff9\1\4\5\uffff\1\7\5\uffff\1\10\1\uffff\2\6\1\uffff\5\ufffc\2\7" +
-		"\1\ufffc\10\ufffd");
+		"\1\ufffe\1\uffff\1\1\2\uffff\2\2\1\3\4\uffff\1\4\1\5\2\uffff\5\ufffb\2\2\1\ufffb" +
+		"\7\ufffa\1\3\5\uffff\1\6\5\uffff\1\7\1\uffff\2\5\4\uffff\1\10\1\uffff\2\6\1\uffff" +
+		"\10\ufffd\10\ufffc");
 
 	private static short[] unpack_vc_short(int size, String... st) {
 		short[] res = new short[size];
@@ -229,13 +228,13 @@ public class ASTLexer {
 			case 0: // tagOpen: /<[a-zA-Z_][a-zA-Z_0-9]*>/
 				 lapg_n.value = current().substring(1, current().length() - 1); 
 				break;
-			case 1: // tagClose: /<\/[a-zA-Z_][a-zA-Z_0-9]*/
-				 lapg_n.value = current().substring(2, current().length()); 
+			case 1: // tagClose: /<\/[a-zA-Z_][a-zA-Z_0-9]*>/
+				 lapg_n.value = current().substring(2, current().length()-1); 
 				break;
-			case 3: // innerText: /[a-zA-Z_0-9]+/
+			case 2: // innerText: /[a-zA-Z_0-9]+/
 				 lapg_n.value = current(); 
 				break;
-			case 4: // _skip: /[\n\t\r ]+/
+			case 3: // _skip: /[\n\t\r ]+/
 				spaceToken = true;
 				break;
 		}

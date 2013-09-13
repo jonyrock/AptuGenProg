@@ -2,7 +2,9 @@
     also text
     <abc>
         text 123
-        <abc>text 123</abz>
+        <abc>text 123</abc>
+        some more 
+        text
     </abc>
     some text 
     <zxcv2> text text</zxcv2>
