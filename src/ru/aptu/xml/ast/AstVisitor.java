@@ -17,4 +17,8 @@ public abstract class AstVisitor {
 	protected boolean visit(AstTagText n) {
 		return true;
 	}
+
+	protected boolean visit(AstTagDOLLAR1 n) {
+		return true;
+	}
 }

@@ -26,20 +26,27 @@ public class Main {
         System.out.println("<" + tree.getName() + ">");
         List<AstInner> inner = tree.getInner();
         boolean prevWasTag = true;
+        boolean prevWasText = false;
         for (AstInner e : inner) {
             if (e.getElem() != null) {
-                System.out.println();
+                if(prevWasText)
+                    System.out.println();
                 printAstTag(e.getElem(), offset + 2);
                 prevWasTag = true;
+                prevWasText = false;
             } else {
                 if (prevWasTag) {
                     for (int i = 0; i <= offset + 1; i++)
                         System.out.print(" ");
                     prevWasTag = false;
                 }
+                prevWasText = true;
                 System.out.print(" " + e.getElem2().getText());
             }
         }
+        
+        if(prevWasText)
+            System.out.println();
         for (int i = 0; i <= offset; i++)
             System.out.print(' ');
         System.out.println("</" + tree.getName() + ">");
@@ -73,7 +80,7 @@ public class Main {
             System.out.println(e.getMessage() +
                     ". Column " + tree.getSource().columnForOffset(e.getOffset()));
         }
-
+        
         if (tree.getErrors().isEmpty())
             printAstTag(tree.getRoot().getRts(), 0);
         else
