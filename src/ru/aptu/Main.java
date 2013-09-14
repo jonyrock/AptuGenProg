@@ -18,52 +18,66 @@ public class Main {
     public static void printHelp() {
         System.out.println("Please enter path to *.xml file.");
     }
-    
-    public static void printAstText(List<AstTagText> text, int offset){
-        for(int i = 0; i <= offset; i++)
-            System.out.print(' ');
-        
-    }
-    
-    public static void printAstTag(AstTag tree, int offset){
-        
-        for(int i = 0; i <= offset; i++)
+
+    public static void printAstTag(AstTag tree, int offset) {
+
+        for (int i = 0; i <= offset; i++)
             System.out.print(" ");
-        System.out.println("<"+tree.getName()+">");
+        System.out.println("<" + tree.getName() + ">");
         List<AstInner> inner = tree.getInner();
         boolean prevWasTag = true;
-        for(AstInner e:inner) {
-            if(e.getElem() != null) {
+        for (AstInner e : inner) {
+            if (e.getElem() != null) {
                 System.out.println();
                 printAstTag(e.getElem(), offset + 2);
                 prevWasTag = true;
             } else {
-                if(prevWasTag){
-                    for(int i = 0; i <= offset+1; i++)
+                if (prevWasTag) {
+                    for (int i = 0; i <= offset + 1; i++)
                         System.out.print(" ");
                     prevWasTag = false;
                 }
                 System.out.print(" " + e.getElem2().getText());
             }
         }
-        for(int i = 0; i <= offset; i++)
+        for (int i = 0; i <= offset; i++)
             System.out.print(' ');
-        System.out.println("</"+tree.getName()+">");
-        
+        System.out.println("</" + tree.getName() + ">");
+
     }
 
-    public static void main(String[] args) throws IOException {
-        BufferedReader r = new BufferedReader(new FileReader("input.xml"));
+    public static void main(String[] args) {
+        if (args.length < 1) {
+            printHelp();
+            System.exit(1);
+        }
+        BufferedReader r = null;
+        try {
+            r = new BufferedReader(new FileReader(args[0]));
+        } catch (IOException e) {
+            System.out.println("Error: can't open the file.");
+            System.exit(2);
+        }
         char[] buf = new char[10000];
-        int len = r.read(buf, 0, 10000);
-
-        ASTTree<AstInput> tree = ASTTree.parse(new ASTTree.TextSource("input.xml", Arrays.copyOf(buf, len), 1));
-        printAstTag(tree.getRoot().getRts(), 0);
+        int len = 0;
+        try {
+            len = r.read(buf, 0, 10000);
+        } catch (IOException e) {
+            System.out.println("Error: can't read the file.");
+            System.exit(3);
+        }
         
+        ASTTree<AstInput> tree = ASTTree.parse(new ASTTree.TextSource(args[0], Arrays.copyOf(buf, len), 1));
+
         for (ASTTree.ASTProblem e : tree.getErrors()) {
             System.out.println(e.getMessage() +
                     ". Column " + tree.getSource().columnForOffset(e.getOffset()));
         }
+
+        if (tree.getErrors().isEmpty())
+            printAstTag(tree.getRoot().getRts(), 0);
+        else
+            System.exit(10);
 
     }
 }
