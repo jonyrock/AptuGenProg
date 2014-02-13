@@ -1,0 +1,15 @@
+Person John
+Person Mike
+Person Masha
+Person Jesica
+
+Person Anna
+	follow Alex
+	follow Jesica
+	follow Mike
+	follow John
+
+Person Alex
+	follow Anna
+	follow Jesica
+	follow Masha
