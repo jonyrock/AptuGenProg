@@ -1,0 +1,14 @@
+grammar org.xtext.SubGraphLang with org.eclipse.xtext.common.Terminals
+
+generate subGraphLang "http://www.xtext.org/SubGraphLang"
+
+Model:
+	persons+=Person*;
+
+Person:
+	'Person' name=ID
+	following+=FollowRecord*;
+
+FollowRecord:
+	'follow' person = [Person]
+;
