@@ -1,0 +1,14 @@
+grammar org.xtext.example.mydsl.SubGrLang with org.eclipse.xtext.common.Terminals
+
+generate subGrLang "http://www.xtext.org/example/mydsl/SubGrLang"
+
+Model:
+	persons+=Person*;
+
+Person:
+	'Person' name=ID
+	following+=FollowRecord*;
+
+FollowRecord:
+	'follow' person = [Person]
+;

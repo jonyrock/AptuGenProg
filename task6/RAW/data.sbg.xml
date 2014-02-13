@@ -1,0 +1,22 @@
+<?xml version="1.0"?>
+<persons>
+  <person name="John">
+  <person>
+  <person name="Mike">
+  <person>
+  <person name="Masha">
+  <person>
+  <person name="Jesica">
+  <person>
+  <person name="Anna">
+    <follow person="Alex"/>
+    <follow person="Jesica"/>
+    <follow person="Mike"/>
+    <follow person="John"/>
+  <person>
+  <person name="Alex">
+    <follow person="Anna"/>
+    <follow person="Jesica"/>
+    <follow person="Masha"/>
+  <person>
+</persons>
