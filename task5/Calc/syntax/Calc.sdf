@@ -1,0 +1,35 @@
+module Calc
+
+imports Common
+
+exports
+
+  context-free start-symbols
+  
+    Start
+
+  context-free syntax
+  
+    Exp			-> Start{Exp}
+    ID          -> Exp {"Var"}
+    INT			-> Exp {"Int"}
+	Exp "*" Exp -> Exp {"Mul", left}
+	Exp "/" Exp -> Exp {"Div", left}
+    Exp "+" Exp -> Exp {"Plus", left}
+    Exp "-" Exp -> Exp {"Minus", left}
+    "(" Exp ")" -> Exp {bracket}
+
+context-free priorities
+    
+    { left:
+      Exp "*" Exp -> Exp
+      Exp "/" Exp -> Exp
+    } >
+    { left:  
+      Exp "+" Exp -> Exp
+      Exp "-" Exp -> Exp
+    }
+
+
+
+

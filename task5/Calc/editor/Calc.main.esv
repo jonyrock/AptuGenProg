@@ -1,0 +1,16 @@
+module Calc.main
+
+imports Calc-Builders Calc-Refactorings Calc-Colorer Calc-Completions Calc-Folding Calc-Outliner Calc-References Calc-Syntax
+
+language General properties
+                  
+  name          : Calc
+  id            : Calc
+  extends       : Root
+                  
+  description   : "Spoofax/IMP-generated editor for the Calc language"
+  url           : http://strategoxt.org
+                  
+  extensions    : cal
+  table         : include/Calc.tbl
+  start symbols : Start

@@ -1,0 +1,870 @@
+Module(
+  "calc"
+, [ Imports(
+      [ Import("libstratego-lib")
+      , Import("libstratego-gpp")
+      , Import("libstratego-aterm")
+      , Import("include/Calc")
+      , Import("lib/editor-common.generated")
+      , Import("lib/index-library.generated")
+      , Import("lib/analysis-library.generated")
+      , Import("lib/analysis-library-internal.generated")
+      , Import("lib/compilation-library.generated")
+      , Import("lib/nbl-library.generated")
+      , Import("names")
+      , Import("check")
+      , Import("generate")
+      , Import("refactor")
+      ]
+    )
+  , Rules(
+      [ SDefT(
+          "analyze"{4525}
+        , []
+        , []
+        , SRule(
+            Rule(
+              NoAnnoList(
+                Tuple([Var("ast"{4542}), Var("path"{4543}), Var("project-path"{4544})])
+              )
+            , NoAnnoList(
+                Tuple(
+                  [ Var("ast''"{4546})
+                  , Var("errors"{4548})
+                  , Var("warnings"{4549})
+                  , Var("notes"{4550})
+                  , Var("filesToAnalyze'"{4551})
+                  ]
+                )
+              )
+            , [ WithClause(
+                  Seq(
+                    Assign(Var("ast'"{4545}), App(Id(), Var("ast"{4542})))
+                  , Seq(
+                      Assign(
+                        NoAnnoList(Tuple([Var("ast''"{4546}), Var("filesToAnalyze"{4547})]))
+                      , App(
+                          CallT(
+                            SVar("analyze-top"{4358})
+                          , []
+                          , [RootApp(CallT(SVar("language"{4223}), [], []))]
+                          )
+                        , NoAnnoList(
+                            Tuple([Var("ast'"{4545}), Var("path"{4543}), Var("project-path"{4544})])
+                          )
+                        )
+                      )
+                    , Seq(
+                        CallT(
+                          SVar("index-transaction"{4302})
+                        , [ Seq(
+                              Assign(
+                                Var("errors"{4548})
+                              , App(
+                                  CallT(
+                                    SVar("collect-all"{3083})
+                                  , [ CallT(SVar("constraint-error"{4512}), [], [])
+                                    , CallT(SVar("conc"{3479}), [], [])
+                                    ]
+                                  , []
+                                  )
+                                , Var("ast''"{4546})
+                                )
+                              )
+                            , Seq(
+                                Assign(
+                                  Var("warnings"{4549})
+                                , App(
+                                    CallT(
+                                      SVar("collect-all"{3083})
+                                    , [ CallT(SVar("constraint-warning"{4523}), [], [])
+                                      , CallT(SVar("conc"{3479}), [], [])
+                                      ]
+                                    , []
+                                    )
+                                  , Var("ast''"{4546})
+                                  )
+                                )
+                              , Assign(
+                                  Var("notes"{4550})
+                                , App(
+                                    CallT(
+                                      SVar("collect-all"{3083})
+                                    , [ CallT(SVar("constraint-note"{4524}), [], [])
+                                      , CallT(SVar("conc"{3479}), [], [])
+                                      ]
+                                    , []
+                                    )
+                                  , Var("ast''"{4546})
+                                  )
+                                )
+                              )
+                            )
+                          ]
+                        , []
+                        )
+                      , Assign(
+                          Var("filesToAnalyze'"{4551})
+                        , App(CallT(SVar("index-filepairs-to-files"{4389}), [], []), Var("filesToAnalyze"{4547}))
+                        )
+                      )
+                    )
+                  )
+                )
+              ]
+            )
+          )
+        )
+      , SDefT(
+          "editor-analyze"{4526}
+        , []
+        , []
+        , SRule(
+            Rule(
+              NoAnnoList(
+                Tuple([Var("ast"{4552}), Var("path"{4553}), Var("project-path"{4554})])
+              )
+            , NoAnnoList(
+                Tuple(
+                  [Var("ast'"{4555}), Var("errors"{4556}), Var("warnings"{4557}), Var("notes"{4558})]
+                )
+              )
+            , [ WithClause(
+                  Seq(
+                    CallT(SVar("editor-init"{4233}), [], [])
+                  , Seq(
+                      Assign(
+                        NoAnnoList(
+                          Tuple(
+                            [ Var("ast'"{4555})
+                            , Var("errors"{4556})
+                            , Var("warnings"{4557})
+                            , Var("notes"{4558})
+                            , Var("filesToAnalyze"{4559})
+                            ]
+                          )
+                        )
+                      , App(
+                          CallT(SVar("analyze"{4525}), [], [])
+                        , NoAnnoList(
+                            Tuple([Var("ast"{4552}), Var("path"{4553}), Var("project-path"{4554})])
+                          )
+                        )
+                      )
+                    , BA(
+                        CallT(
+                          SVar("try"{3069})
+                        , [CallT(SVar("editor-queue-analysis"{4539}), [], [])]
+                        , []
+                        )
+                      , App(
+                          CallT(SVar("remove-all"{3424}), [Match(Var("path"{4553}))], [])
+                        , Var("filesToAnalyze"{4559})
+                        )
+                      )
+                    )
+                  )
+                )
+              ]
+            )
+          )
+        )
+      , SDefT(
+          "editor-analyze"{4526}
+        , []
+        , []
+        , SRule(
+            Rule(
+              Var("files"{4560})
+            , NoAnnoList(Op("None"{4288}, []))
+            , [ WhereClause(Not(CallT(SVar("is-tuple"{3283}), [], [])))
+              , WithClause(
+                  Seq(
+                    CallT(
+                      SVar("index-setup"{4290})
+                    , []
+                    , [ RootApp(CallT(SVar("language"{4223}), [], []))
+                      , NoAnnoList(
+                          List([RootApp(CallT(SVar("project-path"{4229}), [], []))])
+                        )
+                      , NoAnnoList(Str("\".\""))
+                      ]
+                    )
+                  , CallT(SVar("disable-commit-and-compile"{4496}), [], [])
+                  )
+                )
+              , WithClause(CallT(SVar("editor-queue-analysis"{4539}), [], []))
+              , WithClause(
+                  Seq(
+                    BA(
+                      CallT(SVar("enable-commit-and-compile"{4497}), [], [])
+                    , RootApp(CallT(SVar("language"{4223}), [], []))
+                    )
+                  , BA(
+                      CallT(SVar("trigger-commit-and-compile"{4495}), [], [])
+                    , RootApp(CallT(SVar("language"{4223}), [], []))
+                    )
+                  )
+                )
+              ]
+            )
+          )
+        )
+      , SDefT(
+          "editor-save"{4527}
+        , []
+        , []
+        , SRule(
+            Rule(
+              NoAnnoList(Tuple([Wld(), Wld(), Wld(), Wld(), Wld()]))
+            , NoAnnoList(Op("None"{4288}, []))
+            , [ WithClause(
+                  Seq(
+                    CallT(
+                      SVar("index-setup"{4290})
+                    , []
+                    , [ RootApp(CallT(SVar("language"{4223}), [], []))
+                      , NoAnnoList(
+                          List([RootApp(CallT(SVar("project-path"{4229}), [], []))])
+                        )
+                      , NoAnnoList(Str("\".\""))
+                      ]
+                    )
+                  , BA(
+                      CallT(SVar("trigger-commit-and-compile"{4495}), [], [])
+                    , RootApp(CallT(SVar("language"{4223}), [], []))
+                    )
+                  )
+                )
+              ]
+            )
+          )
+        )
+      ]
+    )
+  , Rules(
+      [ SDefT(
+          "editor-resolve"{4528}
+        , []
+        , []
+        , SRule(
+            Rule(
+              NoAnnoList(
+                Tuple(
+                  [ Var("node"{4561})
+                  , Var("position"{4562})
+                  , Var("ast"{4563})
+                  , Var("path"{4564})
+                  , Var("project-path"{4565})
+                  ]
+                )
+              )
+            , Var("target"{4566})
+            , [ WhereClause(
+                  Seq(
+                    CallT(
+                      SVar("index-setup"{4290})
+                    , []
+                    , [ RootApp(CallT(SVar("language"{4223}), [], []))
+                      , NoAnnoList(List([Var("project-path"{4565})]))
+                      , NoAnnoList(
+                          StringQuotation1(
+                            "                                                 "
+                          , [ StringEscape1("                                                 ", Var("project-path"{4565}))
+                            , QStr("/")
+                            , StringEscape1("                                                                ", Var("path"{4564}))
+                            ]
+                          )
+                        )
+                      ]
+                    )
+                  , CallT(
+                      SVar("index-transaction"{4302})
+                    , [ Assign(
+                          Var("target"{4566})
+                        , App(CallT(SVar("index-lookup"{4379}), [], []), Var("node"{4561}))
+                        )
+                      ]
+                    , []
+                    )
+                  )
+                )
+              ]
+            )
+          )
+        )
+      , SDefT(
+          "editor-hover"{4529}
+        , []
+        , []
+        , SRule(
+            Rule(
+              NoAnnoList(
+                Tuple(
+                  [ Var("target"{4567})
+                  , Var("position"{4568})
+                  , Var("ast"{4569})
+                  , Var("path"{4570})
+                  , Var("project-path"{4571})
+                  ]
+                )
+              )
+            , NoAnnoList(StringQuotation1("                                                     ", [StringEscape1("                                                     ", Var("uriString"{4572}))]))
+            , [ WhereClause(
+                  Assign(
+                    Var("uriString"{4572})
+                  , App(
+                      CallT(SVar("index-uri-to-string"{4334}), [], [])
+                    , App(
+                        CallT(SVar("index-uri"{4324}), [], [])
+                      , App(CallT(SVar("index-find-key"{4332}), [], []), Var("target"{4567}))
+                      )
+                    )
+                  )
+                )
+              ]
+            )
+          )
+        )
+      , SDefT(
+          "editor-complete"{4530}
+        , []
+        , []
+        , SRule(
+            Rule(
+              NoAnnoList(
+                Tuple(
+                  [ Var("node"{4573})
+                  , Var("position"{4574})
+                  , Var("ast"{4575})
+                  , Var("path"{4576})
+                  , Var("project-path"{4577})
+                  ]
+                )
+              )
+            , Var("proposals'"{4582})
+            , [ WhereClause(
+                  Seq(
+                    Assign(
+                      Var("node'"{4578})
+                    , App(Prim("\"SSL_EXT_clone_and_set_parents\"", [RootApp(Id())]), Var("node"{4573}))
+                    )
+                  , Seq(
+                      Assign(
+                        As(
+                          Var("item"{4579})
+                        , NoAnnoList(Op("COMPLETION"{4259}, [Var("name"{4580})]))
+                        )
+                      , App(
+                          CallT(
+                            SVar("collect-one"{3099})
+                          , [Match(NoAnnoList(Op("COMPLETION"{4259}, [Wld()])))]
+                          , []
+                          )
+                        , Var("node'"{4578})
+                        )
+                      )
+                    , Seq(
+                        CallT(
+                          SVar("index-transaction"{4302})
+                        , [ AM(
+                              GuardedLChoice(
+                                BA(
+                                  CallT(SVar("index-lookup-all"{4381}), [], [Var("name"{4580})])
+                                , Var("item"{4579})
+                                )
+                              , Id()
+                              , Build(NoAnnoList(List([])))
+                              )
+                            , Var("proposals"{4581})
+                            )
+                          ]
+                        , []
+                        )
+                      , Assign(
+                          Var("proposals'"{4582})
+                        , App(
+                            CallT(
+                              SVar("map"{3443})
+                            , [ Seq(
+                                  CallT(SVar("index-uri"{4324}), [], [])
+                                , CallT(SVar("index-uri-name"{4327}), [], [])
+                                )
+                              ]
+                            , []
+                            )
+                          , Var("proposals"{4581})
+                          )
+                        )
+                      )
+                    )
+                  )
+                )
+              ]
+            )
+          )
+        )
+      ]
+    )
+  , Rules(
+      [ SDefT(
+          "debug-generate-aterm"{4531}
+        , []
+        , []
+        , SRule(
+            Rule(
+              NoAnnoList(
+                Tuple(
+                  [ Var("selected"{4583})
+                  , Var("position"{4584})
+                  , Var("ast"{4585})
+                  , Var("path"{4586})
+                  , Var("project-path"{4587})
+                  ]
+                )
+              )
+            , NoAnnoList(Tuple([Var("filename"{4588}), Var("result"{4589})]))
+            , [ WithClause(
+                  Seq(
+                    Assign(
+                      Var("filename"{4588})
+                    , App(
+                        CallT(SVar("guarantee-extension"{2897}), [], [NoAnnoList(Str("\"aterm\""))])
+                      , Var("path"{4586})
+                      )
+                    )
+                  , Assign(Var("result"{4589}), Var("selected"{4583}))
+                  )
+                )
+              ]
+            )
+          )
+        )
+      , SDefT(
+          "debug-generate-deffed"{4532}
+        , []
+        , []
+        , SRule(
+            Rule(
+              NoAnnoList(
+                Tuple(
+                  [ Var("selected"{4590})
+                  , Var("position"{4591})
+                  , Var("ast"{4592})
+                  , Var("path"{4593})
+                  , Var("project-path"{4594})
+                  ]
+                )
+              )
+            , NoAnnoList(Tuple([Var("filename"{4595}), Var("result"{4596})]))
+            , [ WithClause(
+                  Seq(
+                    CallT(
+                      SVar("index-setup"{4290})
+                    , []
+                    , [ RootApp(CallT(SVar("language"{4223}), [], []))
+                      , NoAnnoList(List([Var("project-path"{4594})]))
+                      , NoAnnoList(
+                          StringQuotation1(
+                            "                                                 "
+                          , [ StringEscape1("                                                 ", Var("project-path"{4594}))
+                            , QStr("/")
+                            , StringEscape1("                                                                ", Var("path"{4593}))
+                            ]
+                          )
+                        )
+                      ]
+                    )
+                  , Seq(
+                      Assign(
+                        Var("filename"{4595})
+                      , App(
+                          CallT(SVar("guarantee-extension"{2897}), [], [NoAnnoList(Str("\"aterm\""))])
+                        , Var("path"{4593})
+                        )
+                      )
+                    , Assign(
+                        Var("result"{4596})
+                      , App(CallT(SVar("analyze-defs"{4404}), [], []), Var("selected"{4590}))
+                      )
+                    )
+                  )
+                )
+              ]
+            )
+          )
+        )
+      , SDefT(
+          "debug-generate-analyzed"{4533}
+        , []
+        , []
+        , SRule(
+            Rule(
+              NoAnnoList(
+                Tuple(
+                  [ Var("selected"{4597})
+                  , Var("position"{4598})
+                  , Var("ast"{4599})
+                  , Var("path"{4600})
+                  , Var("project-path"{4601})
+                  ]
+                )
+              )
+            , NoAnnoList(Tuple([Var("filename"{4602}), Var("result"{4603})]))
+            , [ WithClause(
+                  Seq(
+                    CallT(SVar("editor-init"{4233}), [], [])
+                  , Seq(
+                      Assign(
+                        Var("filename"{4602})
+                      , App(
+                          CallT(SVar("guarantee-extension"{2897}), [], [NoAnnoList(Str("\"analyzed.aterm\""))])
+                        , Var("path"{4600})
+                        )
+                      )
+                    , Assign(
+                        Var("result"{4603})
+                      , App(
+                          CallT(
+                            SVar("analyze-top"{4358})
+                          , []
+                          , [RootApp(CallT(SVar("language"{4223}), [], []))]
+                          )
+                        , NoAnnoList(
+                            Tuple([Var("selected"{4597}), Var("path"{4600}), Var("project-path"{4601})])
+                          )
+                        )
+                      )
+                    )
+                  )
+                )
+              ]
+            )
+          )
+        )
+      , SDefT(
+          "debug-index-show-current-file"{4534}
+        , []
+        , []
+        , SRule(
+            Rule(
+              NoAnnoList(
+                Tuple(
+                  [ Var("selected"{4604})
+                  , Var("position"{4605})
+                  , Var("ast"{4606})
+                  , Var("path"{4607})
+                  , Var("project-path"{4608})
+                  ]
+                )
+              )
+            , NoAnnoList(Tuple([Var("filename"{4609}), Var("result"{4610})]))
+            , [ WithClause(
+                  Seq(
+                    CallT(
+                      SVar("index-setup"{4290})
+                    , []
+                    , [ RootApp(CallT(SVar("language"{4223}), [], []))
+                      , NoAnnoList(List([Var("project-path"{4608})]))
+                      , NoAnnoList(
+                          StringQuotation1(
+                            "                                                 "
+                          , [ StringEscape1("                                                 ", Var("project-path"{4608}))
+                            , QStr("/")
+                            , StringEscape1("                                                                ", Var("path"{4607}))
+                            ]
+                          )
+                        )
+                      ]
+                    )
+                  , Seq(
+                      Assign(
+                        Var("filename"{4609})
+                      , App(
+                          CallT(SVar("guarantee-extension"{2897}), [], [NoAnnoList(Str("\"index.currentfile.aterm\""))])
+                        , Var("path"{4607})
+                        )
+                      )
+                    , Assign(
+                        Var("result"{4610})
+                      , App(CallT(SVar("index-get-all-in-file"{4305}), [], []), Var("path"{4607}))
+                      )
+                    )
+                  )
+                )
+              ]
+            )
+          )
+        )
+      , SDefT(
+          "debug-index-show-all-files"{4535}
+        , []
+        , []
+        , SRule(
+            Rule(
+              NoAnnoList(
+                Tuple(
+                  [ Var("selected"{4611})
+                  , Var("position"{4612})
+                  , Var("ast"{4613})
+                  , Var("path"{4614})
+                  , Var("project-path"{4615})
+                  ]
+                )
+              )
+            , NoAnnoList(Tuple([Var("filename"{4616}), Var("result"{4618})]))
+            , [ WithClause(
+                  Seq(
+                    CallT(
+                      SVar("index-setup"{4290})
+                    , []
+                    , [ RootApp(CallT(SVar("language"{4223}), [], []))
+                      , NoAnnoList(List([Var("project-path"{4615})]))
+                      , NoAnnoList(
+                          StringQuotation1(
+                            "                                                 "
+                          , [ StringEscape1("                                                 ", Var("project-path"{4615}))
+                            , QStr("/")
+                            , StringEscape1("                                                                ", Var("path"{4614}))
+                            ]
+                          )
+                        )
+                      ]
+                    )
+                  , Seq(
+                      Assign(
+                        Var("filename"{4616})
+                      , App(
+                          CallT(SVar("guarantee-extension"{2897}), [], [NoAnnoList(Str("\"index.allfiles.aterm\""))])
+                        , Var("path"{4614})
+                        )
+                      )
+                    , Assign(
+                        Var("result"{4618})
+                      , App(
+                          CallT(
+                            SVar("map"{3443})
+                          , [ Scope(
+                                ["filename"{4617}]
+                              , SRule(
+                                  Rule(
+                                    Var("filename"{4617})
+                                  , NoAnnoList(
+                                      Tuple(
+                                        [ Var("filename"{4617})
+                                        , App(CallT(SVar("index-get-all-in-file"{4305}), [], []), Var("filename"{4617}))
+                                        ]
+                                      )
+                                    )
+                                  , []
+                                  )
+                                )
+                              )
+                            ]
+                          , []
+                          )
+                        , RootApp(CallT(SVar("index-get-all-files"{4304}), [], []))
+                        )
+                      )
+                    )
+                  )
+                )
+              ]
+            )
+          )
+        )
+      , SDefT(
+          "debug-index-clear-current"{4536}
+        , []
+        , []
+        , SRule(
+            Rule(
+              NoAnnoList(
+                Tuple(
+                  [ Var("selected"{4619})
+                  , Var("position"{4620})
+                  , Var("ast"{4621})
+                  , Var("path"{4622})
+                  , Var("project-path"{4623})
+                  ]
+                )
+              )
+            , NoAnnoList(Op("None"{4288}, []))
+            , [ WithClause(
+                  Seq(
+                    CallT(
+                      SVar("index-setup"{4290})
+                    , []
+                    , [ RootApp(CallT(SVar("language"{4223}), [], []))
+                      , NoAnnoList(List([Var("project-path"{4623})]))
+                      , NoAnnoList(
+                          StringQuotation1(
+                            "                                                 "
+                          , [ StringEscape1("                                                 ", Var("project-path"{4623}))
+                            , QStr("/")
+                            , StringEscape1("                                                                ", Var("path"{4622}))
+                            ]
+                          )
+                        )
+                      ]
+                    )
+                  , BA(
+                      CallT(SVar("index-clear-file"{4296}), [], [])
+                    , NoAnnoList(
+                        StringQuotation1(
+                          "                           "
+                        , [ StringEscape1("                           ", Var("project-path"{4623}))
+                          , QStr("/")
+                          , StringEscape1("                                          ", Var("path"{4622}))
+                          ]
+                        )
+                      )
+                    )
+                  )
+                )
+              ]
+            )
+          )
+        )
+      , SDefT(
+          "debug-index-clear"{4537}
+        , []
+        , []
+        , SRule(
+            Rule(
+              NoAnnoList(
+                Tuple(
+                  [ Var("selected"{4624})
+                  , Var("position"{4625})
+                  , Var("ast"{4626})
+                  , Var("path"{4627})
+                  , Var("project-path"{4628})
+                  ]
+                )
+              )
+            , NoAnnoList(Op("None"{4288}, []))
+            , [ WithClause(
+                  Seq(
+                    CallT(
+                      SVar("index-setup"{4290})
+                    , []
+                    , [ RootApp(CallT(SVar("language"{4223}), [], []))
+                      , NoAnnoList(List([Var("project-path"{4628})]))
+                      , NoAnnoList(
+                          StringQuotation1(
+                            "                                                 "
+                          , [ StringEscape1("                                                 ", Var("project-path"{4628}))
+                            , QStr("/")
+                            , StringEscape1("                                                                ", Var("path"{4627}))
+                            ]
+                          )
+                        )
+                      ]
+                    )
+                  , CallT(SVar("index-clear"{4297}), [], [])
+                  )
+                )
+              ]
+            )
+          )
+        )
+      , SDefT(
+          "debug-index-reload"{4538}
+        , []
+        , []
+        , SRule(
+            Rule(
+              NoAnnoList(
+                Tuple(
+                  [ Var("selected"{4629})
+                  , Var("position"{4630})
+                  , Var("ast"{4631})
+                  , Var("path"{4632})
+                  , Var("project-path"{4633})
+                  ]
+                )
+              )
+            , NoAnnoList(Op("None"{4288}, []))
+            , [ WithClause(
+                  Seq(
+                    CallT(
+                      SVar("index-setup"{4290})
+                    , []
+                    , [ RootApp(CallT(SVar("language"{4223}), [], []))
+                      , NoAnnoList(List([Var("project-path"{4633})]))
+                      , NoAnnoList(
+                          StringQuotation1(
+                            "                                                 "
+                          , [ StringEscape1("                                                 ", Var("project-path"{4633}))
+                            , QStr("/")
+                            , StringEscape1("                                                                ", Var("path"{4632}))
+                            ]
+                          )
+                        )
+                      ]
+                    )
+                  , CallT(SVar("index-reload"{4298}), [], [])
+                  )
+                )
+              ]
+            )
+          )
+        )
+      ]
+    )
+  , Rules(
+      [ SDefT(
+          "editor-queue-analysis"{4539}
+        , []
+        , []
+        , Seq(
+            Not(Match(NoAnnoList(List([]))))
+          , CallT(
+              SVar("queue-strategy"{4274})
+            , []
+            , [NoAnnoList(Str("\"editor-sequential-analyze\"")), NoAnnoList(Str("\"Analyzing files\""))]
+            )
+          )
+        )
+      , SDefT(
+          "editor-parallel-analyze"{4540}
+        , []
+        , []
+        , SRule(
+            Rule(
+              Var("files"{4634})
+            , NoAnnoList(Op("None"{4288}, []))
+            , [ WithClause(
+                  CallT(
+                    SVar("index-parallel-analyze-files"{4360})
+                  , [CallT(SVar("analyze"{4525}), [], [])]
+                  , []
+                  )
+                )
+              ]
+            )
+          )
+        )
+      , SDefT(
+          "editor-sequential-analyze"{4541}
+        , []
+        , []
+        , SRule(
+            Rule(
+              Var("files"{4635})
+            , NoAnnoList(Op("None"{4288}, []))
+            , [ WithClause(
+                  CallT(
+                    SVar("index-sequential-analyze-files"{4361})
+                  , [CallT(SVar("analyze"{4525}), [], [])]
+                  , []
+                  )
+                )
+              ]
+            )
+          )
+        )
+      ]
+    )
+  ]
+)
