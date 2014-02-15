@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<history>
+  <StructureModification>
+    <dependencies>
+      <model index="tazn" modelUID="r:75af391f-7dcc-4116-bdfd-e4715b91349b(TimeTableLang.structure)" version="-1" />
+    </dependencies>
+    <rename id="tazn.8117425987503668721" type="CONCEPT" from="lectures" to="Lectures" />
+  </StructureModification>
+  <StructureModification>
+    <dependencies>
+      <model index="tazn" modelUID="r:75af391f-7dcc-4116-bdfd-e4715b91349b(TimeTableLang.structure)" version="0" />
+    </dependencies>
+    <rename id="tazn.8117425987503668721" type="CONCEPT" from="Lectures" to="Timeable" />
+  </StructureModification>
+  <StructureModification>
+    <dependencies>
+      <model index="tazn" modelUID="r:75af391f-7dcc-4116-bdfd-e4715b91349b(TimeTableLang.structure)" version="1" />
+    </dependencies>
+    <rename id="tazn.8117425987503668721" type="CONCEPT" from="Timeable" to="Timetable" />
+  </StructureModification>
+</history>
+

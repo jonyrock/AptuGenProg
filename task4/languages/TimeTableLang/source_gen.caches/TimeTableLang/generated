@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<dependencies version="2" modelHash="7llab17rbh421d04t5seotj9ttjqiaq">
+  <dep model="r:37c852aa-1895-459f-878e-3ce7368dc8bb(TimeTableLang.editor)" hash="-3unpfgelxrh8zum8dhhl05c8ubcyf8b" />
+  <dep model="r:98cd2852-57cd-49e5-9f40-00bc3ba9a963(TimeTableLang.typesystem)" hash="-cjl781nfsinzd46wumtp6ett7sq6u9c" />
+  <common>
+    <dep model="r:37c852aa-1895-459f-878e-3ce7368dc8bb(TimeTableLang.editor)" />
+    <dep model="r:98cd2852-57cd-49e5-9f40-00bc3ba9a963(TimeTableLang.typesystem)" />
+    <file name="Language.java" />
+  </common>
+</dependencies>
+
