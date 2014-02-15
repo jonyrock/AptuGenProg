@@ -2,7 +2,7 @@
 <dependenciesRoot>
   <dependency className="TimeTableLang.behavior.BehaviorAspectDescriptor" file="BehaviorAspectDescriptor.java">
     <classNode dependClassName="TimeTableLang.behavior.Lecture_BehaviorDescriptor" />
-    <classNode dependClassName="TimeTableLang.behavior.TimeSpan_BehaviorDescriptor" />
+    <classNode dependClassName="TimeTableLang.behavior.TimeSpanLiteral_BehaviorDescriptor" />
     <classNode dependClassName="TimeTableLang.behavior.Timetable_BehaviorDescriptor" />
     <classNode dependClassName="java.lang.String" />
     <classNode dependClassName="java.util.Arrays" />
@@ -20,7 +20,7 @@
     <classNode extendsClassName="java.lang.Cloneable" />
     <classNode extendsClassName="jetbrains.mps.smodel.runtime.impl.CompiledBehaviorDescriptor" />
   </dependency>
-  <dependency className="TimeTableLang.behavior.TimeSpan_BehaviorDescriptor" file="TimeSpan_BehaviorDescriptor.java">
+  <dependency className="TimeTableLang.behavior.TimeSpanLiteral_BehaviorDescriptor" file="TimeSpanLiteral_BehaviorDescriptor.java">
     <classNode dependClassName="java.lang.Override" />
     <classNode dependClassName="java.lang.String" />
     <classNode dependClassName="jetbrains.mps.lang.core.behavior.BaseConcept_BehaviorDescriptor" />
@@ -30,10 +30,6 @@
     <classNode dependClassName="java.lang.Override" />
     <classNode dependClassName="java.lang.String" />
     <classNode dependClassName="jetbrains.mps.lang.core.behavior.BaseConcept_BehaviorDescriptor" />
-    <classNode dependClassName="jetbrains.mps.lang.core.behavior.INamedConcept_Behavior" />
-    <classNode dependClassName="jetbrains.mps.lang.core.behavior.INamedConcept_BehaviorDescriptor" />
-    <classNode dependClassName="org.jetbrains.mps.openapi.model.SNode" />
-    <classNode extendsClassName="java.lang.Cloneable" />
     <classNode extendsClassName="jetbrains.mps.smodel.runtime.impl.CompiledBehaviorDescriptor" />
   </dependency>
 </dependenciesRoot>

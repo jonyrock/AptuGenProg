@@ -17,7 +17,7 @@ public class EditorAspectDescriptorImpl implements EditorAspectDescriptor {
       case 0:
         return Collections.<ConceptEditor>singletonList(new Lecture_Editor());
       case 1:
-        return Collections.<ConceptEditor>singletonList(new TimeSpan_Editor());
+        return Collections.<ConceptEditor>singletonList(new TimeSpanLiteral_Editor());
       case 2:
         return Collections.<ConceptEditor>singletonList(new Timetable_Editor());
       default:
@@ -36,5 +36,5 @@ public class EditorAspectDescriptorImpl implements EditorAspectDescriptor {
   }
 
 
-  private static String[] stringSwitchCases_xbvbvu_a0a0a = new String[]{"TimeTableLang.structure.Lecture", "TimeTableLang.structure.TimeSpan", "TimeTableLang.structure.Timetable"};
+  private static String[] stringSwitchCases_xbvbvu_a0a0a = new String[]{"TimeTableLang.structure.Lecture", "TimeTableLang.structure.TimeSpanLiteral", "TimeTableLang.structure.Timetable"};
 }

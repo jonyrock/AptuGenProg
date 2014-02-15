@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<dependencies version="2" modelHash="b4q2h6n2wbe1t68bgcbw6slln4rqvkq">
+<dependencies version="2" modelHash="-7pzqes93cf7hy4nx6j29pbe34sxi5hh">
   <dep model="r:00000000-0000-4000-0000-011c8959029e(jetbrains.mps.lang.editor.structure)" />
   <dep model="r:00000000-0000-4000-0000-011c895902ca(jetbrains.mps.baseLanguage.structure)" />
-  <dep model="r:37c852aa-1895-459f-878e-3ce7368dc8bb(TimeTableLang.editor)" hash="-7btj3tc1pnt7zlsb1xgar3so7g1u7kz" />
+  <dep model="r:37c852aa-1895-459f-878e-3ce7368dc8bb(TimeTableLang.editor)" hash="472tb71nkl9j9ette94qf248iyqxgcc" />
   <dep model="r:98cd2852-57cd-49e5-9f40-00bc3ba9a963(TimeTableLang.typesystem)" hash="-cjl781nfsinzd46wumtp6ett7sq6u9c" />
   <common>
     <dep model="r:00000000-0000-4000-0000-011c8959029e(jetbrains.mps.lang.editor.structure)" />
