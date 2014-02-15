@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <debugInfo>
-  <unitInfo fileName="BehaviorAspectDescriptor.java" startLine="9" startPosition="0" endLine="26" endPosition="0" unitName="TimeTableLang.behavior.BehaviorAspectDescriptor" />
+  <unitInfo fileName="BehaviorAspectDescriptor.java" startLine="9" startPosition="0" endLine="28" endPosition="0" unitName="TimeTableLang.behavior.BehaviorAspectDescriptor" />
   <unitInfo fileName="Lecture_BehaviorDescriptor.java" startLine="10" startPosition="0" endLine="23" endPosition="0" unitName="TimeTableLang.behavior.Lecture_BehaviorDescriptor" />
+  <unitInfo fileName="TimeSpan_BehaviorDescriptor.java" startLine="7" startPosition="0" endLine="16" endPosition="0" unitName="TimeTableLang.behavior.TimeSpan_BehaviorDescriptor" />
   <unitInfo fileName="Timetable_BehaviorDescriptor.java" startLine="10" startPosition="0" endLine="23" endPosition="0" unitName="TimeTableLang.behavior.Timetable_BehaviorDescriptor" />
 </debugInfo>
 
