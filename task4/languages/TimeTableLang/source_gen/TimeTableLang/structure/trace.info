@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <debugInfo>
-  <unitInfo fileName="StructureAspectDescriptor.java" startLine="10" startPosition="0" endLine="29" endPosition="0" unitName="TimeTableLang.structure.StructureAspectDescriptor" />
+  <unitInfo fileName="StructureAspectDescriptor.java" startLine="10" startPosition="0" endLine="31" endPosition="0" unitName="TimeTableLang.structure.StructureAspectDescriptor" />
   <root nodeRef="r:75af391f-7dcc-4116-bdfd-e4715b91349b(TimeTableLang.structure)/8117425987504119577">
     <nodeInfo nodeId="8117425987504119577" fileName="DayName.java" startLine="18" startPosition="0" endLine="19" endPosition="0" conceptFqName="jetbrains.mps.baseLanguage.structure.FieldDeclaration" propertyString="myName" />
     <nodeInfo nodeId="8117425987504119577" fileName="DayName.java" startLine="20" startPosition="27" endLine="21" endPosition="23" conceptFqName="jetbrains.mps.baseLanguage.structure.ReturnStatement" />

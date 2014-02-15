@@ -16,13 +16,15 @@ public class StructureAspectDescriptor implements jetbrains.mps.smodel.runtime.S
       case 0:
         return new ConceptDescriptorBuilder("TimeTableLang.structure.Lecture").super_("jetbrains.mps.lang.core.structure.BaseConcept").parents("jetbrains.mps.lang.core.structure.BaseConcept", "jetbrains.mps.lang.core.structure.INamedConcept").properties("inRoom", "presenter").children(new String[]{"at"}, new boolean[]{false}).alias("lecture", "").create();
       case 1:
-        return new ConceptDescriptorBuilder("TimeTableLang.structure.TimeSpanLiteral").super_("jetbrains.mps.lang.core.structure.BaseConcept").parents("jetbrains.mps.lang.core.structure.BaseConcept").properties("fromHours", "fromMinutes", "toHours", "toMinutes").create();
+        return new ConceptDescriptorBuilder("TimeTableLang.structure.TimeLiteral").super_("jetbrains.mps.lang.core.structure.BaseConcept").parents("jetbrains.mps.lang.core.structure.BaseConcept").properties("hours", "minutes").create();
       case 2:
+        return new ConceptDescriptorBuilder("TimeTableLang.structure.TimeSpanLiteral").super_("jetbrains.mps.lang.core.structure.BaseConcept").parents("jetbrains.mps.lang.core.structure.BaseConcept").children(new String[]{"from", "to"}, new boolean[]{false, false}).create();
+      case 3:
         return new ConceptDescriptorBuilder("TimeTableLang.structure.Timetable").super_("jetbrains.mps.lang.core.structure.BaseConcept").parents("jetbrains.mps.lang.core.structure.BaseConcept").properties("name").children(new String[]{"lectures"}, new boolean[]{true}).alias("Timetable", "Timetable root node").create();
       default:
         return StructureAspectInterpreted.getInstance().getDescriptor(conceptFqName);
     }
   }
 
-  private static String[] stringSwitchCases_1htk8d_a0a0b = new String[]{"TimeTableLang.structure.Lecture", "TimeTableLang.structure.TimeSpanLiteral", "TimeTableLang.structure.Timetable"};
+  private static String[] stringSwitchCases_1htk8d_a0a0b = new String[]{"TimeTableLang.structure.Lecture", "TimeTableLang.structure.TimeLiteral", "TimeTableLang.structure.TimeSpanLiteral", "TimeTableLang.structure.Timetable"};
 }

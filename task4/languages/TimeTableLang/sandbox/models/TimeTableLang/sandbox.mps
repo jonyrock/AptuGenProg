@@ -7,15 +7,19 @@
   <import index="tazn" modelUID="r:75af391f-7dcc-4116-bdfd-e4715b91349b(TimeTableLang.structure)" version="3" implicit="yes" />
   <root type="tazn.Timetable" typeId="tazn.8117425987503668721" id="8117425987504037301" nodeInfo="ng">
     <property name="name" nameId="tazn.8117425987504119575" value="Sunday" />
-    <node role="lectures" roleId="tazn.8117425987503702173" type="tazn.Lecture" typeId="tazn.8117425987503702178" id="8117425987504069022" nodeInfo="ng">
-      <property name="name" nameId="tpck.1169194664001" value="Programming" />
-      <property name="inRoom" nameId="tazn.8117425987503708298" value="123" />
-      <property name="presenter" nameId="tazn.8117425987503708329" value="Vasiliy Pupkin" />
-      <node role="at" roleId="tazn.8117425987503708283" type="tazn.TimeSpanLiteral" typeId="tazn.8117425987503708235" id="8117425987504069023" nodeInfo="ng">
-        <property name="fromHours" nameId="tazn.8117425987503708236" value="10" />
-        <property name="fromMinutes" nameId="tazn.8117425987503708238" value="00" />
-        <property name="toHours" nameId="tazn.8117425987503708241" value="11" />
-        <property name="toMinutes" nameId="tazn.8117425987503708245" value="00" />
+    <node role="lectures" roleId="tazn.8117425987503702173" type="tazn.Lecture" typeId="tazn.8117425987503702178" id="8117425987504367200" nodeInfo="ng">
+      <property name="name" nameId="tpck.1169194664001" value="MPS" />
+      <property name="inRoom" nameId="tazn.8117425987503708298" value="12" />
+      <property name="presenter" nameId="tazn.8117425987503708329" value="ASDSAd" />
+      <node role="at" roleId="tazn.8117425987503708283" type="tazn.TimeSpanLiteral" typeId="tazn.8117425987503708235" id="8117425987504367201" nodeInfo="ng">
+        <node role="from" roleId="tazn.8117425987504225478" type="tazn.TimeLiteral" typeId="tazn.8117425987504225407" id="8117425987504367202" nodeInfo="ng">
+          <property name="hours" nameId="tazn.8117425987504225408" value="21" />
+          <property name="minutes" nameId="tazn.8117425987504225433" value="12" />
+        </node>
+        <node role="to" roleId="tazn.8117425987504225525" type="tazn.TimeLiteral" typeId="tazn.8117425987504225407" id="8117425987504367203" nodeInfo="ng">
+          <property name="hours" nameId="tazn.8117425987504225408" value="11" />
+          <property name="minutes" nameId="tazn.8117425987504225433" value="20" />
+        </node>
       </node>
     </node>
   </root>
