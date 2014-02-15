@@ -49,11 +49,11 @@
                 <selectionStack>
                   <stackElement className="jetbrains.mps.nodeEditor.selection.EditorCellLabelSelection">
                     <property name="hasNonTrivialSelection" value="false" />
-                    <property name="caretXRelative" value="40" />
-                    <property name="caretX" value="55" />
+                    <property name="caretXRelative" value="8" />
+                    <property name="caretX" value="167" />
                     <property name="sideSelectDirection" value="NONE" />
-                    <cellInfo cellId="Constant_7bvz9h_a0a" cellNumber="0" isInList="false">
-                      <node node_reference="r:37e03266-e10d-4e54-88d0-b44dc4dcde09(TimeTableLang.sandbox)/8117425987504037301" />
+                    <cellInfo cellId="property_minutes" cellNumber="0" isInList="false">
+                      <node node_reference="r:37e03266-e10d-4e54-88d0-b44dc4dcde09(TimeTableLang.sandbox)/8117425987504722052" />
                     </cellInfo>
                   </stackElement>
                 </selectionStack>
@@ -74,17 +74,7 @@
           <provider selected="true" editor-type-id="MPSFileEditor">
             <state class="jetbrains.mps.ide.editorTabs.TabbedEditor$TabbedEditorState">
               <memento viewPositionX="0" viewPositionY="0">
-                <selectionStack>
-                  <stackElement className="jetbrains.mps.nodeEditor.selection.EditorCellLabelSelection">
-                    <property name="hasNonTrivialSelection" value="false" />
-                    <property name="caretXRelative" value="0" />
-                    <property name="caretX" value="47" />
-                    <property name="sideSelectDirection" value="NONE" />
-                    <cellInfo cellId="empty_inspectedCellModel" cellNumber="0" isInList="false">
-                      <node node_reference="r:37c852aa-1895-459f-878e-3ce7368dc8bb(TimeTableLang.editor)/8117425987503997486" />
-                    </cellInfo>
-                  </stackElement>
-                </selectionStack>
+                <selectionStack />
                 <folded />
                 <enabledHints />
               </memento>
@@ -103,17 +93,7 @@
           <provider selected="true" editor-type-id="MPSFileEditor">
             <state class="jetbrains.mps.ide.editorTabs.TabbedEditor$TabbedEditorState">
               <memento viewPositionX="0" viewPositionY="0">
-                <selectionStack>
-                  <stackElement className="jetbrains.mps.nodeEditor.selection.EditorCellLabelSelection">
-                    <property name="hasNonTrivialSelection" value="false" />
-                    <property name="caretXRelative" value="0" />
-                    <property name="caretX" value="243" />
-                    <property name="sideSelectDirection" value="NONE" />
-                    <cellInfo cellId="property_name" cellNumber="0" isInList="false">
-                      <node node_reference="r:37c852aa-1895-459f-878e-3ce7368dc8bb(TimeTableLang.editor)/8117425987503971835" />
-                    </cellInfo>
-                  </stackElement>
-                </selectionStack>
+                <selectionStack />
                 <folded />
                 <enabledHints />
               </memento>
@@ -132,17 +112,7 @@
           <provider selected="true" editor-type-id="MPSFileEditor">
             <state class="jetbrains.mps.ide.editorTabs.TabbedEditor$TabbedEditorState">
               <memento viewPositionX="0" viewPositionY="0">
-                <selectionStack>
-                  <stackElement className="jetbrains.mps.nodeEditor.selection.EditorCellLabelSelection">
-                    <property name="hasNonTrivialSelection" value="false" />
-                    <property name="caretXRelative" value="0" />
-                    <property name="caretX" value="243" />
-                    <property name="sideSelectDirection" value="NONE" />
-                    <cellInfo cellId="property_name" cellNumber="0" isInList="false">
-                      <node node_reference="r:37c852aa-1895-459f-878e-3ce7368dc8bb(TimeTableLang.editor)/8117425987503978506" />
-                    </cellInfo>
-                  </stackElement>
-                </selectionStack>
+                <selectionStack />
                 <folded />
                 <enabledHints />
               </memento>
@@ -826,21 +796,28 @@
         </state>
       </provider>
     </entry>
+    <entry file="mps://node://TimeTableLang/TimeTableLang.structure/Timetable">
+      <provider selected="true" editor-type-id="MPSFileEditor">
+        <state class="jetbrains.mps.ide.editorTabs.TabbedEditor$TabbedEditorState">
+          <memento viewPositionX="0" viewPositionY="0">
+            <selectionStack />
+            <folded />
+            <enabledHints />
+          </memento>
+          <inspectorMemento viewPositionX="0" viewPositionY="0">
+            <selectionStack />
+            <folded />
+            <enabledHints />
+          </inspectorMemento>
+          <node node_ref="r:37c852aa-1895-459f-878e-3ce7368dc8bb(TimeTableLang.editor)/8117425987503997486" />
+        </state>
+      </provider>
+    </entry>
     <entry file="mps://node://TimeTableLang/TimeTableLang.structure/TimeSpanLiteral">
       <provider selected="true" editor-type-id="MPSFileEditor">
         <state class="jetbrains.mps.ide.editorTabs.TabbedEditor$TabbedEditorState">
           <memento viewPositionX="0" viewPositionY="0">
-            <selectionStack>
-              <stackElement className="jetbrains.mps.nodeEditor.selection.EditorCellLabelSelection">
-                <property name="hasNonTrivialSelection" value="false" />
-                <property name="caretXRelative" value="0" />
-                <property name="caretX" value="243" />
-                <property name="sideSelectDirection" value="NONE" />
-                <cellInfo cellId="property_name" cellNumber="0" isInList="false">
-                  <node node_reference="r:37c852aa-1895-459f-878e-3ce7368dc8bb(TimeTableLang.editor)/8117425987503971835" />
-                </cellInfo>
-              </stackElement>
-            </selectionStack>
+            <selectionStack />
             <folded />
             <enabledHints />
           </memento>
@@ -857,17 +834,7 @@
       <provider selected="true" editor-type-id="MPSFileEditor">
         <state class="jetbrains.mps.ide.editorTabs.TabbedEditor$TabbedEditorState">
           <memento viewPositionX="0" viewPositionY="0">
-            <selectionStack>
-              <stackElement className="jetbrains.mps.nodeEditor.selection.EditorCellLabelSelection">
-                <property name="hasNonTrivialSelection" value="false" />
-                <property name="caretXRelative" value="0" />
-                <property name="caretX" value="243" />
-                <property name="sideSelectDirection" value="NONE" />
-                <cellInfo cellId="property_name" cellNumber="0" isInList="false">
-                  <node node_reference="r:37c852aa-1895-459f-878e-3ce7368dc8bb(TimeTableLang.editor)/8117425987503978506" />
-                </cellInfo>
-              </stackElement>
-            </selectionStack>
+            <selectionStack />
             <folded />
             <enabledHints />
           </memento>
@@ -880,33 +847,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="mps://node://TimeTableLang/TimeTableLang.structure/Timetable">
-      <provider selected="true" editor-type-id="MPSFileEditor">
-        <state class="jetbrains.mps.ide.editorTabs.TabbedEditor$TabbedEditorState">
-          <memento viewPositionX="0" viewPositionY="0">
-            <selectionStack>
-              <stackElement className="jetbrains.mps.nodeEditor.selection.EditorCellLabelSelection">
-                <property name="hasNonTrivialSelection" value="false" />
-                <property name="caretXRelative" value="0" />
-                <property name="caretX" value="47" />
-                <property name="sideSelectDirection" value="NONE" />
-                <cellInfo cellId="empty_inspectedCellModel" cellNumber="0" isInList="false">
-                  <node node_reference="r:37c852aa-1895-459f-878e-3ce7368dc8bb(TimeTableLang.editor)/8117425987503997486" />
-                </cellInfo>
-              </stackElement>
-            </selectionStack>
-            <folded />
-            <enabledHints />
-          </memento>
-          <inspectorMemento viewPositionX="0" viewPositionY="0">
-            <selectionStack />
-            <folded />
-            <enabledHints />
-          </inspectorMemento>
-          <node node_ref="r:37c852aa-1895-459f-878e-3ce7368dc8bb(TimeTableLang.editor)/8117425987503997486" />
-        </state>
-      </provider>
-    </entry>
     <entry file="mps://node://TimeTableLang.sandbox/TimeTableLang.sandbox/Timetable">
       <provider selected="true" editor-type-id="MPSFileEditor">
         <state class="jetbrains.mps.ide.editor.BaseNodeEditor$BaseEditorState">
@@ -914,11 +854,11 @@
             <selectionStack>
               <stackElement className="jetbrains.mps.nodeEditor.selection.EditorCellLabelSelection">
                 <property name="hasNonTrivialSelection" value="false" />
-                <property name="caretXRelative" value="40" />
-                <property name="caretX" value="55" />
+                <property name="caretXRelative" value="8" />
+                <property name="caretX" value="167" />
                 <property name="sideSelectDirection" value="NONE" />
-                <cellInfo cellId="Constant_7bvz9h_a0a" cellNumber="0" isInList="false">
-                  <node node_reference="r:37e03266-e10d-4e54-88d0-b44dc4dcde09(TimeTableLang.sandbox)/8117425987504037301" />
+                <cellInfo cellId="property_minutes" cellNumber="0" isInList="false">
+                  <node node_reference="r:37e03266-e10d-4e54-88d0-b44dc4dcde09(TimeTableLang.sandbox)/8117425987504722052" />
                 </cellInfo>
               </stackElement>
             </selectionStack>
