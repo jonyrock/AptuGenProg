@@ -3,8 +3,8 @@
   <persistence version="8" />
   <language namespace="f28ef78b-dc98-4502-9ce2-abebd24f76f6(TimeTableLang)" />
   <language namespace="ceab5195-25ea-4f22-9b92-103b95ca8c0c(jetbrains.mps.lang.core)" />
-  <import index="tpck" modelUID="r:00000000-0000-4000-0000-011c89590288(jetbrains.mps.lang.core.structure)" version="0" implicit="yes" />
   <import index="tazn" modelUID="r:75af391f-7dcc-4116-bdfd-e4715b91349b(TimeTableLang.structure)" version="3" implicit="yes" />
+  <import index="tpck" modelUID="r:00000000-0000-4000-0000-011c89590288(jetbrains.mps.lang.core.structure)" version="0" implicit="yes" />
   <root type="tazn.Timetable" typeId="tazn.8117425987503668721" id="8117425987504037301" nodeInfo="ng">
     <property name="name" nameId="tazn.8117425987504119575" value="Sunday" />
     <node role="lectures" roleId="tazn.8117425987503702173" type="tazn.Lecture" typeId="tazn.8117425987503702178" id="8117425987504367200" nodeInfo="ng">

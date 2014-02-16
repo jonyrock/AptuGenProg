@@ -7,17 +7,25 @@
   </models>
   <accessoryModels />
   <generators>
-    <generator generatorUID="TimeTableLang#8117425987503387249" uuid="3c29e2a5-2ab2-4f45-8ff1-532117daf13e">
+    <generator name="" generatorUID="TimeTableLang#8117425987503387249" uuid="3c29e2a5-2ab2-4f45-8ff1-532117daf13e">
       <models>
         <modelRoot contentPath="${module}" type="default">
           <sourceRoot location="generator/template" />
         </modelRoot>
       </models>
+      <facets>
+        <facet type="java" />
+      </facets>
       <external-templates />
+      <dependencies>
+        <dependency reexport="false">f28ef78b-dc98-4502-9ce2-abebd24f76f6(TimeTableLang)</dependency>
+        <dependency reexport="false">479c7a8c-02f9-43b5-9139-d910cb22f298(jetbrains.mps.core.xml)</dependency>
+      </dependencies>
       <usedLanguages>
         <usedLanguage>f28ef78b-dc98-4502-9ce2-abebd24f76f6(TimeTableLang)</usedLanguage>
         <usedLanguage>b401a680-8325-4110-8fd3-84331ff25bef(jetbrains.mps.lang.generator)</usedLanguage>
         <usedLanguage>d7706f63-9be2-479c-a3da-ae92af1e64d5(jetbrains.mps.lang.generator.generationContext)</usedLanguage>
+        <usedLanguage>b83431fe-5c8f-40bc-8a36-65e25f4dd253(jetbrains.mps.lang.textGen)</usedLanguage>
       </usedLanguages>
       <usedDevKits>
         <usedDevKit>fbc25dd2-5da4-483a-8b19-70928e1b62d7(jetbrains.mps.devkit.general-purpose)</usedDevKit>

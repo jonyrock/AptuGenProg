@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<dependencies version="2" modelHash="-80jpb5ov8uc5wxi180ewu6zp2dcm8n7">
+<dependencies version="2" modelHash="-7iyuzyx1ivgtickf18cq6v2dh9rf33j">
   <dep model="r:00000000-0000-4000-0000-011c8959029e(jetbrains.mps.lang.editor.structure)" />
   <dep model="r:00000000-0000-4000-0000-011c895902ca(jetbrains.mps.baseLanguage.structure)" />
   <dep model="r:37c852aa-1895-459f-878e-3ce7368dc8bb(TimeTableLang.editor)" hash="-8j8rokcjsjjbk7u82wb7nz1lhb53ili" />
